@@ -147,22 +147,23 @@
   </div>
 </div>
 </section>
-<!--   <div class="flex flex-col justify-center mx-auto items-center h-full px-6 md:px-16 lg:px-24 xl:px-32">
-        <div class="w-full md:w-11/12 h-max mb-4 mt-0 p-4 bg-white tx-diamond tx-sm">
+<div id="posttag" class="inline-block justify-between bg-yellow-600  text-base text-white bg-justify py-1 md:text-4xl uppercase px-2 garamond font-bold"> Weekly <span class="c-label"></span></div>
+
+  <div class="flex flex-col justify-center mx-auto items-center h-full px-6 md:px-16 lg:px-24 xl:px-32">
+        <div class="w-full md:w-11/12 h-max mb-4 mt-0 p-4 bg-white italic" style="font-size: 12px;">
          
-            <span class="md:hidden mb-4 font-light text-sm tx-xl"><i class="fa fa-home px-2"></i><span class="label"></span>/ <span class="content-topic"></span>
+            <span class="md:hidden mb-4 font-light"><i class="fa fa-home px-2"></i><span class="label"></span>/ <span class="content-topic"></span>
             </span> 
            <div class="flex items-center justify-between">
-            <span class="text-base"><i class="fa fa-pen px-2"></i><span class="published"></span></span>
-            <span class="hidden md:block font-light text-xl tx-xl"><i class="fa fa-home px-2"></i><span class="d-label"></span>/ <span class="d-content-topic"></span>
+            <span class=""><i class="fa fa-pen px-2"></i><span class="published"></span></span>
+            <span class="hidden md:block font-light"><i class="fa fa-home px-2"></i><span class="d-label"></span>/ <span class="d-content-topic"></span>
         </span> 
-            <span class="italic text-base">
-                <i class="fa fa-user px-2 text-sm"></i><span class="postwriter"></span>
+            <span class="">
+                <i class="fa fa-user px-2"></i><span class="postwriter"></span>
             </span>
             </div>
         </div>
-    </div>-->
-  <div id="posttag" class="inline-block justify-between bg-yellow-600  text-base text-white bg-justify py-1 md:text-4xl uppercase px-2 garamond font-bold"> Weekly <span class="c-label"></span></div>
+    </div>
 
 
 <!-- topic display -->
@@ -320,28 +321,25 @@
 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const blogID = urlParams.get('id')
-        // console.log(blogID);
+        const blogID = urlParams.get('id');
 
         function showPage() {
             fetch(`https://www.googleapis.com/blogger/v3/blogs/7744757304303679629/posts/${blogID}?key=AIzaSyAjEyj_94p-HFjFn76t6f-sLNdugSF8LhQ`)
                 .then(res => res.json())
                 .then((data) => {
-                    console.log(data)
                     document.querySelector('#title-h').innerHTML = data.title;
                     document.querySelector('#title').innerHTML = data.title;
-                    // document.querySelector('.published').innerHTML =  `${formatDate(data.published.split('T')[0])}`
-                    // document.querySelector('.label').innerHTML = `${data.labels[0].toUpperCase()}`;
-                    // document.querySelector('.content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
-                    // document.querySelector('.d-label').innerHTML = `${data.labels[0].toUpperCase()}`;
-                    // document.querySelector('.c-label').innerHTML = `${data.labels[0].toUpperCase()}`;
-                    // document.querySelector('.d-content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
+                    document.querySelector('.published').innerHTML =  `${formatDate(data.published.split('T')[0])}`
+                    document.querySelector('.label').innerHTML = `${data.labels[0].toUpperCase()}`;
+                    document.querySelector('.content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 3).join(' ')}...`;
+                    document.querySelector('.d-label').innerHTML = `${data.labels[0].toUpperCase()}`;
+                    document.querySelector('.c-label').innerHTML = `${data.labels[0].toUpperCase()}`;
+                    document.querySelector('.d-content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
                     document.querySelector('.blog-content').innerHTML = data.content;
-                    // document.querySelector('.postwriter').innerHTML = data.content.match(/Written\s+By:\s*([^\.<]+)/i)?.[1].trim() || 'Unknown Author';
-                    // console.log(document.querySelector('.blog-content').innerHTML);
+                    document.querySelector('.postwriter').innerHTML = data.content.match(/Written\s+By:\s*([^\.<]+)/i)?.[1].trim() || 'Unknown Author'; 
                     let headerImg = document.querySelector('.programs-detail-section');
                     headerImg.style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.7) 40%), url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}')`;
-                    console.log(data.content);
+                    // console.log(data.content);
                     // headerImg.src = `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`;
                     // document.querySelector('.programs-detail-section').style.backgroundImage = `url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1] || 'https://via.placeholder.com/800x400'}')`;
 
