@@ -48,7 +48,7 @@
     /* Background image for homepage: mobile and desktop*/
     @media (max-width:699px) {
             .programs-detail-section {
-                background-image: url('https://i.ibb.co/SXSkRTCS/istockphoto-963011846-612x612.jpg');
+                /* background-image: url('https://i.ibb.co/SXSkRTCS/istockphoto-963011846-612x612.jpg'); */
                 height: 45vh;
                 background-position: cover no-repeat;
                 color: white;
@@ -57,7 +57,7 @@
     }
         @media (min-width:700px) {
             .programs-detail-section {
-                background-image: url('https://i.ibb.co/SXSkRTCS/istockphoto-963011846-612x612.jpg');
+                /* background-image: url('https://i.ibb.co/SXSkRTCS/istockphoto-963011846-612x612.jpg'); */
                 height: 50vh;
                 background-position: center/cover no-repeat;
                 color: white;
@@ -133,23 +133,20 @@
 
   <!-- header ends here-->
   <!-- image background and program introduction-->
-  <div class="w-full h-full header-bg opacity-70 py-12 md:py-24  px-2 md:px-14  ">
-    <!--<h1 class="text-sm font-light md:text-2xl animate__animated animate__fadeIn animate__slow animate__delay-1.5s "> <span class="block leading-none">Welcome To</span>
-        </h1>-->
-        <div class="md:pt-14 md:px-10  xl:px-32 ">
-            <div class="w-full text-white ">
-                <!--<div class="text-sm font-light md:text-3xl lg:text-5xl animate__animated animate__fadeIn animate__slow animate__delay-1.5s ">
-                    <span class="block leading-none">Welcome To</span>
-                </div>-->
-                <div class="text-4xl garamond md:text-8xl animate__animated animate__fadeIn animate__slow animate__delay-1s tracking-tight">
-                    <span class="block leading-none font-semibold ">News &amp; Updates </span> 
-                  <p class="text-sm md:text-2xl italic mt-3 tracking-wide"> Track and catch up with our hilarious events.</p>
-                    
-                    </div>
-        
+  <section class="programs-detail-section bg-gray-800 bg-center bg-cover  w-full text-white">
+    <div class="w-full h-full header-bg opacity-70 py-12 md:py-24  px-2 md:px-14  ">
+          <div class="md:pt-14 md:px-10  xl:px-32 ">
+              <div class="w-full text-white ">  
+                  <div class="text-4xl garamond md:text-8xl animate__animated animate__fadeIn animate__slow animate__delay-1s tracking-tight">
+                      <span class="block leading-none font-semibold" id="title"></span> 
+                    <!-- <p class="text-sm md:text-2xl italic mt-3 tracking-wide"> Track and catch up with our hilarious events.</p> -->
+                      
+                      </div>
+          
+    </div>
   </div>
 </div>
-</div>
+</section>
 <!--   <div class="flex flex-col justify-center mx-auto items-center h-full px-6 md:px-16 lg:px-24 xl:px-32">
         <div class="w-full md:w-11/12 h-max mb-4 mt-0 p-4 bg-white tx-diamond tx-sm">
          
@@ -165,20 +162,14 @@
             </div>
         </div>
     </div>-->
-<section class="programs-detail-section bg-gray-800 bg-center relative  bg-cover bg-center w-full h-75 ">
-      
-  <div class="w-full opacity-80 h-full bg-cover py-20  md:pt-96 px-2.5 ">
-  
-  </div>
-  </section>
-  <button id="posttag" class="inline-block justify-between bg-yellow-600  text-base text-white bg-justify py-1 md:text-4xl uppercase px-2 garamond font-bold"> Weekly <span class="c-label"></span></button>
+  <div id="posttag" class="inline-block justify-between bg-yellow-600  text-base text-white bg-justify py-1 md:text-4xl uppercase px-2 garamond font-bold"> Weekly <span class="c-label"></span></div>
 
 
 <!-- topic display -->
   <section class="">
-    <div class="mb-5 md:mb-12">
+    <!-- <div class="mb-5 md:mb-12">
       <h3 class="text-center font-bold text-lg md:text-5xl uppercase mt-6 md:my-8 px-10 md:px-20 " id="title"> the same time and place for everything </h3>
-    </div>
+    </div> -->
     <div class="">
       <p class="text-6xl md:text-9xl text-center px-2 text-gray-800"> - - - - - </p>
     </div>
@@ -186,10 +177,7 @@
   
   <!-- Publications -->
   <main class="py-10 md:py-20 px-2.5 md:px-5 text-black text-sm md:text-3xl leading-5 md:leading-10 text-justify">
-    <!-- Nugget flyer to be uploaded via blogger
-    <img id="headerImg" src="https://via.placeholder.com/600x400" class="w-full border" alt="nugget flyer" />
-   -->
-    <!-- content-->
+    
     <div class="pt-10 tracking-tight blog-content">
 
     </div>
@@ -351,10 +339,11 @@
                     document.querySelector('.blog-content').innerHTML = data.content;
                     document.querySelector('.postwriter').innerHTML = data.content.match(/Written\s+By:\s*([^\.<]+)/i)?.[1].trim() || 'Unknown Author';
                     // console.log(document.querySelector('.blog-content').innerHTML);
-                    let headerImg = document.querySelector('#headerImg');
-                    // headerImg.style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.7) 40%), url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}')`;
+                    let headerImg = document.querySelector('.programs-detail-section');
+                    headerImg.style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.7) 40%), url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}')`;
+                    console.log(data.content);
                     // headerImg.src = `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`;
-                    document.querySelector('.programs-detail-section').style.backgroundImage = `url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1] || 'https://via.placeholder.com/800x400'}')`;
+                    // document.querySelector('.programs-detail-section').style.backgroundImage = `url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1] || 'https://via.placeholder.com/800x400'}')`;
 
                 });
         }
