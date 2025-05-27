@@ -330,14 +330,14 @@
                     console.log(data)
                     document.querySelector('#title-h').innerHTML = data.title;
                     document.querySelector('#title').innerHTML = data.title;
-                    document.querySelector('.published').innerHTML =  `${formatDate(data.published.split('T')[0])}`
-                    document.querySelector('.label').innerHTML = `${data.labels[0].toUpperCase()}`;
-                    document.querySelector('.content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
-                    document.querySelector('.d-label').innerHTML = `${data.labels[0].toUpperCase()}`;
-                    document.querySelector('.c-label').innerHTML = `${data.labels[0].toUpperCase()}`;
-                    document.querySelector('.d-content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
+                    // document.querySelector('.published').innerHTML =  `${formatDate(data.published.split('T')[0])}`
+                    // document.querySelector('.label').innerHTML = `${data.labels[0].toUpperCase()}`;
+                    // document.querySelector('.content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
+                    // document.querySelector('.d-label').innerHTML = `${data.labels[0].toUpperCase()}`;
+                    // document.querySelector('.c-label').innerHTML = `${data.labels[0].toUpperCase()}`;
+                    // document.querySelector('.d-content-topic').innerHTML = `${data.title.toUpperCase().split(' ').slice(0, 6).join(' ')}...`;
                     document.querySelector('.blog-content').innerHTML = data.content;
-                    document.querySelector('.postwriter').innerHTML = data.content.match(/Written\s+By:\s*([^\.<]+)/i)?.[1].trim() || 'Unknown Author';
+                    // document.querySelector('.postwriter').innerHTML = data.content.match(/Written\s+By:\s*([^\.<]+)/i)?.[1].trim() || 'Unknown Author';
                     // console.log(document.querySelector('.blog-content').innerHTML);
                     let headerImg = document.querySelector('.programs-detail-section');
                     headerImg.style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.7) 40%), url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}')`;
