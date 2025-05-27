@@ -60,7 +60,7 @@ window.onload = function () {
           <p class="px-5 text-sm mb-5 md:text-2xl tracking-tight">
             ${item.content.replace(/<[^>]+>/g, '').split(' ').slice(0, 30).join(' ')} ...
           </p>
-          <a href="http://drisaden.github.io/solace-buk/single.html?id=${item.id}" target="_blank" class="px-5">
+          <a href="http://solacechambersbuk.com.ng/single.html?id=${item.id}" target="_blank" class="px-5">
             <p class="text-sm button md:text-2xl text-blue-700 mb-2 px-5 font-semibold uppercase">Read More »</p>
           </a>
           <hr>
