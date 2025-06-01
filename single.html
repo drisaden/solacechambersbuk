@@ -342,7 +342,7 @@
                     let headerImg = document.querySelector('.programs-detail-section');
                     headerImg.style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.7) 40%), url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}')`;
                     let titleFav = document.querySelector('#title-fav');
-                    titleFav.href = ${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]};
+                    titleFav.href = `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`;
                     console.log(titleFav.href);
                     // console.log(data.content);
                     // headerImg.src = `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`;
