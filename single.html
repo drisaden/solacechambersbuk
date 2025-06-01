@@ -346,7 +346,6 @@
                     titleFav.href = `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`;
                     let ogImage = document.querySelector('meta[property="og:image"]');
                     ogImage.setAttribute('content', `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`);
-                    console.log(titleFav.href);
                     // console.log(data.content);
                     // headerImg.src = `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`;
                     // document.querySelector('.programs-detail-section').style.backgroundImage = `url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1] || 'https://via.placeholder.com/800x400'}')`;
