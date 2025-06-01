@@ -8,6 +8,7 @@
   <meta name="description" content="Solace Chambers is the foremost Chamber within the Faculty of Law, Bayero University, Kano. It is renowned for its exceptional commitment towards nurturing its members in various aspects of law and legal practice, particularly in terms of litigation and other legal proceedings.">
   <meta name="keywords" content=" Solace Chambers; All are Equal before the Law! ">
   <meta name="author" content="Solace Chambers, Bayero University, Kano">
+  <meta property="og:image" content="" />
   <!-- tailwind-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
@@ -343,6 +344,8 @@
                     headerImg.style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.7) 40%), url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}')`;
                     let titleFav = document.querySelector('#title-fav');
                     titleFav.href = `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`;
+                    let ogImage = document.querySelector('meta[property="og:image"]');
+                    ogImage.setAttribute('content', `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`);
                     console.log(titleFav.href);
                     // console.log(data.content);
                     // headerImg.src = `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`;
