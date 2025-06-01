@@ -36,6 +36,7 @@
   <!--Web fonts-->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital@1&display=swap" rel="stylesheet">
+  <link rel="icon" href="" type="image/x-icon">
   <title id="title-h"></title>
   <style>
     img{
@@ -339,6 +340,9 @@
                     document.querySelector('.postwriter').innerHTML = data.content.match(/Written\s+By:\s*([^\.<]+)/i)?.[1].trim() || 'Unknown Author'; 
                     let headerImg = document.querySelector('.programs-detail-section');
                     headerImg.style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.7) 40%), url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}')`;
+                    let titleFav = document.querySelector('#title-fav');
+                    titleFav.href = ${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]};
+                    console.log(titleFav.href);
                     // console.log(data.content);
                     // headerImg.src = `${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1]}`;
                     // document.querySelector('.programs-detail-section').style.backgroundImage = `url('${data.content.match(/<img[^>]*src="([^"]*)"/)?.[1] || 'https://via.placeholder.com/800x400'}')`;
