@@ -305,7 +305,7 @@
         once: true
       }, );
       
-  fetch('https://www.googleapis.com/blogger/v3/blogs/7744757304303679629/posts?key=AIzaSyAjEyj_94p-HFjFn76t6f-sLNdugSF8LhQ')
+  fetch('https://www.googleapis.com/blogger/v3/blogs/7744757304303679629/posts?key=AIzaSyAjEyj_94p-HFjFn76t6f-sLNdugSF8LhQ&maxResults=500')
     .then(response => response.json())
     .then(data => {
       const legalbitSection = document.getElementById('legalbit-posts');
@@ -316,6 +316,7 @@
       }
 
       const filtered = data.items.filter(item => item.labels?.includes('legalbit'));
+      
       filtered.forEach(item => {
         const src = item.content.match(/<img[^>]*src="([^"]*)"/)?.[1] || 'https://via.placeholder.com/600x400';
         const cleanText = item.content.replace(/<[^>]+>/g, '').split(' ').slice(0, 30).join(' ') + '...';

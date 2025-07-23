@@ -312,7 +312,7 @@
         once: true
       }, );
       
-  fetch('https://www.googleapis.com/blogger/v3/blogs/7744757304303679629/posts?key=AIzaSyAjEyj_94p-HFjFn76t6f-sLNdugSF8LhQ')
+  fetch('https://www.googleapis.com/blogger/v3/blogs/7744757304303679629/posts?key=AIzaSyAjEyj_94p-HFjFn76t6f-sLNdugSF8LhQ&maxResults=500')
     .then(response => response.json())
     .then(data => {
       const newsSection = document.getElementById('news-posts');
