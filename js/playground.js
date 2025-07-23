@@ -47,6 +47,7 @@ window.onload = function () {
   }
   
   function createCard(item, src) {
+    const authors = extractAuthor(item.content);
     return `
       <div data-aos=" " class="bg-gray-100 shadow-lg w-full rounded-lg mb-1 aos-init aos-animate">
         <div class="md:w-full overflow-hidden rounded-t">
@@ -55,7 +56,7 @@ window.onload = function () {
         <div class="text-center pt-6">
           <h2 class="text-base md:text-3xl pt-5 my-8 font-bold tracking-tight uppercase">${item.title}</h2> 
           <author class="text-gray-600 mb-4 text-xs">
-            <span class="font-bold">Author:</span> ${item.content.match(/Written\s+By:\s*([^\.<]+)/i)?.[1].trim() || 'Unknown Author'}
+            <span class="font-bold">Author:</span> ${authors}
           </author>
           <p class="px-5 text-sm mb-5 md:text-2xl tracking-tight">
             ${item.content.replace(/<[^>]+>/g, '').split(' ').slice(0, 30).join(' ')} ...
@@ -71,6 +72,43 @@ window.onload = function () {
       </div>
     `;
   }
+  function extractAuthor(content) {
+    try {
+        // Try multiple patterns in order of preference
+        const authorPatterns = [
+            /(?:ABOUT THE AUTHOR(S?)|Author:|Written by:?)\s*([^.]+?)(?:\s*(?:can be reached|is a member|via|\.|<\/p>|$))/i,
+            /Written by:?\s*([^<\.]+)/i
+        ];
+        
+        let aboutAuthorText = '';
+        for (const pattern of authorPatterns) {
+            const match = content.match(pattern);
+            if (match && match[1]) {
+                aboutAuthorText = match[1].trim();
+                break;
+            }
+        }
+        
+        if (aboutAuthorText) {
+            const namePattern = /(?:[A-Z][a-z]+\.?\s*)?(?:[A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)*)(?:\s*(?:,|\band\b|&)\s*(?:[A-Z][a-z]+\.?\s*)?(?:[A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)*))*/g;
+            
+            const nameMatches = aboutAuthorText.match(namePattern);
+            
+            if (nameMatches && nameMatches[0]) {
+                return nameMatches[0]
+                    .replace(/\s+/g, ' ')
+                    .replace(/\s*,\s*/g, ', ')
+                    .replace(/\s+\band\b\s+/g, ' and ')
+                    .replace(/\s*&\s*/g, ' & ')
+                    .replace(/\b([A-Z])\.\s*/g, '$1. ')
+                    .trim();
+            }
+        }
+    } catch (e) {
+        console.error('Error extracting author:', e);
+    }
+    return 'Unknown Author';
+}
   
   function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
