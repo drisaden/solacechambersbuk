@@ -47,7 +47,36 @@ window.onload = function () {
   }
   
   function createCard(item, src) {
-    const authors = extractAuthor(item.content);
+    // Combined author extraction that handles multiple formats
+let authors = 'Unknown Author';
+try {
+    // Try both "ABOUT THE AUTHOR" and "Author:" formats
+    const aboutAuthorMatch = item.content.match(
+        /(?:ABOUT THE AUTHOR(S?)|Author:)\s*([^.]+?)(?:\s*(?:can be reached|is a member|via|\.|<\/p>|$))/i
+    );
+    
+    if (aboutAuthorMatch) {
+        const aboutAuthorText = aboutAuthorMatch[2].trim();
+        
+        const namePattern = /(?:[A-Z][a-z]+\.?\s*)?(?:[A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)*)(?:\s*(?:,|\band\b|&)\s*(?:[A-Z][a-z]+\.?\s*)?(?:[A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)*))*/g;
+        
+        const nameMatches = aboutAuthorText.match(namePattern);
+        
+        if (nameMatches && nameMatches[0]) {
+            authors = nameMatches[0]
+                .replace(/\s+/g, ' ')         // Collapse multiple spaces
+                .replace(/\s*,\s*/g, ', ')    // Normalize commas
+                .replace(/\s+\band\b\s+/g, ' and ')  // Normalize "and"
+                .replace(/\s*&\s*/g, ' & ')   // Normalize ampersand
+                .replace(/\b([A-Z])\.\s*/g, '$1. ')  // Normalize initials
+                .trim();
+        }
+    }
+} catch (e) {
+    console.error('Error extracting author:', e);
+    authors = 'Unknown Author'; // Fallback value
+}
+    
     return `
       <div data-aos=" " class="bg-gray-100 shadow-lg w-full rounded-lg mb-1 aos-init aos-animate">
         <div class="md:w-full overflow-hidden rounded-t">
@@ -72,43 +101,7 @@ window.onload = function () {
       </div>
     `;
   }
-  function extractAuthor(content) {
-    try {
-        // Try multiple patterns in order of preference
-        const authorPatterns = [
-            /(?:ABOUT THE AUTHOR(S?)|Author:|Written by:?)\s*([^.]+?)(?:\s*(?:can be reached|is a member|via|\.|<\/p>|$))/i,
-            /Written by:?\s*([^<\.]+)/i
-        ];
-        
-        let aboutAuthorText = '';
-        for (const pattern of authorPatterns) {
-            const match = content.match(pattern);
-            if (match && match[1]) {
-                aboutAuthorText = match[1].trim();
-                break;
-            }
-        }
-        
-        if (aboutAuthorText) {
-            const namePattern = /(?:[A-Z][a-z]+\.?\s*)?(?:[A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)*)(?:\s*(?:,|\band\b|&)\s*(?:[A-Z][a-z]+\.?\s*)?(?:[A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)*))*/g;
-            
-            const nameMatches = aboutAuthorText.match(namePattern);
-            
-            if (nameMatches && nameMatches[0]) {
-                return nameMatches[0]
-                    .replace(/\s+/g, ' ')
-                    .replace(/\s*,\s*/g, ', ')
-                    .replace(/\s+\band\b\s+/g, ' and ')
-                    .replace(/\s*&\s*/g, ' & ')
-                    .replace(/\b([A-Z])\.\s*/g, '$1. ')
-                    .trim();
-            }
-        }
-    } catch (e) {
-        console.error('Error extracting author:', e);
-    }
-    return 'Unknown Author';
-}
+  
   
   function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
