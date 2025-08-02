@@ -15,7 +15,7 @@ function myFunction(x) {
         
   //JS TYPEWRITER
 const mainText = "Nurturing Legal Excellence & Competence"; // First text to type
-const subText = "...A hub for budding legal practitioners committed building competence, practical advocacy and brighter legal career.";         // Second text to type
+const subText = "...A hub for budding legal practitioners committed to building competence, practical advocacy and brighter legal career.";         // Second text to type
 const speed = 100; // Typing speed in milliseconds
 
 // Get references to HTML elements
