@@ -313,6 +313,7 @@
     .then(response => response.json())
     .then(data => {
       const newsSection = document.getElementById('news-posts');
+      console.log(data);
 
       if (!data.items) {
         newsSection.innerHTML = '<p class="text-center text-red-600">No posts found.</p>';
