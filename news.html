@@ -313,7 +313,6 @@
     .then(response => response.json())
     .then(data => {
       const newsSection = document.getElementById('news-posts');
-      console.log(data);
 
       if (!data.items) {
         newsSection.innerHTML = '<p class="text-center text-red-600">No posts found.</p>';
@@ -325,45 +324,13 @@
         const src = item.content.match(/<img[^>]*src="([^"]*)"/)?.[1] || 'https://via.placeholder.com/600x400';
         const cleanText = item.content.replace(/<[^>]+>/g, '').split(' ').slice(0, 30).join(' ') + '...';
         const date = formatDate(item.published.split('T')[0]);
-        // Combined author extraction that handles multiple formats
-let authors = 'Unknown Author';
-try {
-    // Try both "ABOUT THE AUTHOR" and "Author:" formats
-    const aboutAuthorMatch = item.content.match(
-        /(?:ABOUT THE AUTHOR(S?)|Author:)\s*([^.]+?)(?:\s*(?:can be reached|is a member|via|\.|<\/p>|$))/i
-    );
-    
-    if (aboutAuthorMatch) {
-        const aboutAuthorText = aboutAuthorMatch[2].trim();
-        
-        const namePattern = /(?:[A-Z][a-z]+\.?\s*)?(?:[A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)*)(?:\s*(?:,|\band\b|&)\s*(?:[A-Z][a-z]+\.?\s*)?(?:[A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)*))*/g;
-        
-        const nameMatches = aboutAuthorText.match(namePattern);
-        
-        if (nameMatches && nameMatches[0]) {
-            authors = nameMatches[0]
-                .replace(/\s+/g, ' ')         // Collapse multiple spaces
-                .replace(/\s*,\s*/g, ', ')    // Normalize commas
-                .replace(/\s+\band\b\s+/g, ' and ')  // Normalize "and"
-                .replace(/\s*&\s*/g, ' & ')   // Normalize ampersand
-                .replace(/\b([A-Z])\.\s*/g, '$1. ')  // Normalize initials
-                .trim();
-        }
-    }
-} catch (e) {
-    console.error('Error extracting author:', e);
-    authors = 'Unknown Author'; // Fallback value
-}
-
+   
         newsSection.innerHTML += `<div data-aos="fade-down" class="bg-gray-100 shadow-lg w-full rounded-lg mb-3 aos-init aos-animate">
         <div class="md:w-full overflow-hidden rounded-t">
           <img src="${src}" alt="${item.title}" class="w-full h-full object-cover object-center border border-b-0">
         </div>
         <div class="text-center pt-10">
           <h2 class="text-base md:text-3xl pt-5 my-8 font-bold tracking-tight uppercase">${item.title}</h2> 
-          <author class="text-gray-600 mb-6 text-xs">
-            <span class="font-bold">Author:</span> ${author}
-          </author>
           <p class="px-5 text-sm mb-8 md:text-2xl tracking-tight">
             ${item.content.replace(/<[^>]+>/g, '').split(' ').slice(0, 30).join(' ')} ...
           </p>
