@@ -51,15 +51,15 @@ function formatDate(dateString) {
                 populatePublicationElement.innerHTML += `
                 <div data-aos=" " class="bg-gray-100 shadow-lg w-full rounded-lg mb-3 aos-init aos-animate">
 <div class="md:w-full overflow-hidden rounded-t">
-  <img src="${src}" alt="${item.title}" class="w-full h-full object-cover object-center  border border-b-0 ">
+  <img src="${src}" alt="${item.title}" class="w-full h-full md:h-48 md:h-48 object-cover object-center  border border-b-0 ">
 </div> 
 
 <div class="text-center pt-10">
-                <h2 class="text-base md:text-3xl pt-5 my-8 font-bold tracking-tight uppercase">${item.title}</h2> 
-          <author class="text-gray-600 mb-6 text-xs"> <span class="font-bold"> Author: </span> Muhibudeen Qosim (Deputy Director of Research & Litigation) </author>
- <p class="px-5 text-sm mb-8 md:text-2xl tracking-tight ">  ${item.content.replace(/<[^>]+>/g, '').split(' ').slice(0, 30).join(' ')} ... </p>
- <a href="https://solacebuk.com.ng/single.html?id=${item.id}" target="_blank" class="px-5 "> <p class="text-sm button md:text-2xl text-blue-700  mb-5 px-5  font-semibold uppercase">Read More » </p> </a> <hr>
- <p class="text-sm md:text-lg font-semibold my-6 text-gray-600"> <i class="fas fa-calendar pr-1"></i>${formatDate(item.published.split('T')[0])}</p>
+                <h2 class="text-base md:text-xl pt-5 my-8 font-bold tracking-tight uppercase">${item.title}</h2> 
+          <author class="text-gray-600 mb-6 text-xs md:text-base"> <span class="font-bold"> Author: </span> Muhibudeen Qosim (Deputy Director of Research & Litigation) </author>
+ <p class="px-5 text-sm mb-8 md:text-base tracking-tight ">  ${item.content.replace(/<[^>]+>/g, '').split(' ').slice(0, 30).join(' ')} ... </p>
+ <a href="https://solacebuk.com.ng/single.html?id=${item.id}" target="_blank" class="px-5 "> <p class="text-sm button md:text-base text-blue-700  mb-5 px-5  font-semibold uppercase">Read More » </p> </a> <hr>
+ <p class="text-sm md:text-base font-semibold my-6 text-gray-600"> <i class="fas fa-calendar pr-1"></i>${formatDate(item.published.split('T')[0])}</p>
 </div>
 </div>`;
             });
