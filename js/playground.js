@@ -80,7 +80,7 @@ function createCard(item, src) {
   return `
       <div data-aos=" " class="bg-gray-100 shadow-lg rounded-lg mb-1 aos-init aos-animate md:text-base">
         <div class="overflow-hidden rounded-t">
-          <img src="${src}" alt="${item.title}" class="w-full h- md:w-48 md:h-48 object-cover object-center border border-b-0">
+          <img src="${src}" alt="${item.title}" class="w-full  object-cover object-center border border-b-0">
         </div>
         <div class="text-center pt-6">
           <h2 class="text-base md:text-base pt-5 my-8 font-bold tracking-tight ">${item.title}</h2> 
