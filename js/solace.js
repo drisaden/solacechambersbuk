@@ -159,7 +159,7 @@ function updateGallery() {
         let img = document.createElement("img");
         img.src = imageUrl;
         img.alt = "Gallery Image";
-        img.className = "w-full h-69 object-contain flex-shrink-0";
+        img.className = "w-full h-69 md:h-78 object-contain flex-shrink-0";
         img.style.display = index === 0 ? "block" : "none";
         slider.appendChild(img);
     });
